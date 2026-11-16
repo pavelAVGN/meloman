@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14101f">
+<title>Меломан</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="logo" id="goHome">МЕЛО<span>МАН</span></div>
+  <div class="score" id="score"></div>
+</header>
+
+<!-- Библиотека -->
+<main id="library" class="screen">
+  <button class="big" id="addSong">+ Добавить песню</button>
+  <ul id="songList" class="songs"></ul>
+  <p class="hint" id="emptyHint">Песен пока нет. Добавь песню (аудиофайл + текст .lrc), и приложение само сделает пропуски.</p>
+</main>
+
+<!-- Редактор песни -->
+<main id="editor" class="screen" hidden>
+  <h2 id="edTitle">Новая песня</h2>
+  <label>Название<input id="fTitle" placeholder="Например: Кислотный DJ"></label>
+  <label>Исполнитель<input id="fArtist" placeholder="Например: Казускома"></label>
+  <label>Аудиофайл (mp3, m4a…)
+    <input id="fAudio" type="file" accept="audio/*">
+    <small id="audioName"></small>
+  </label>
+  <label>Текст в формате LRC
+    <textarea id="fLrc" rows="10" placeholder="[00:12.30]Первая строка песни&#10;[00:15.80]Вторая строка…"></textarea>
+  </label>
+  <div class="row">
+    <label class="btn">Загрузить .lrc<input id="fLrcFile" type="file" accept=".lrc,.txt,text/plain" hidden></label>
+    <button id="findLrc">Найти текст в интернете</button>
+    <button id="tapSync">Разметить тапами</button>
+  </div>
+  <small id="lrcStatus" class="hint"></small>
+  <label>Сколько пропусков делать<input id="fGaps" type="number" min="1" max="15" value="3"></label>
+  <div class="row">
+    <button class="big" id="saveSong">Сохранить</button>
+    <button id="cancelEdit">Отмена</button>
+  </div>
+</main>
+
+<!-- Разметка тапами -->
+<main id="tapper" class="screen" hidden>
+  <p class="hint">Включи песню и жми большую кнопку ровно в момент, когда начинается строка.</p>
+  <div class="tap-now" id="tapPrev"></div>
+  <div class="tap-next" id="tapNext"></div>
+  <button class="tap-btn" id="tapBtn">▶ Старт</button>
+  <div class="row">
+    <button id="tapUndo">↶ Отменить</button>
+    <button id="tapDone">Готово</button>
+    <button id="tapCancel">Отмена</button>
+  </div>
+</main>
+
+<!-- Игра -->
+<main id="play" class="screen stage" hidden>
+  <div class="now-title" id="playTitle"></div>
+  <div class="gapinfo" id="gapInfo"></div>
+  <div class="lyrics">
+    <div class="line cur" id="lineCur"></div>
+    <div class="line nxt" id="lineNxt"></div>
+  </div>
+  <div class="controls">
+    <button id="pBack">⟵</button>
+    <button id="pToggle" class="round">▶</button>
+    <button id="pReshuffle" title="Новые пропуски">🎲</button>
+  </div>
+  <input type="range" id="pSeek" min="0" max="1000" value="0">
+
+  <div class="gap-panel" id="gapPanel" hidden>
+    <div class="gp-title">⏸ СТОП! Какие слова дальше?</div>
+    <div class="row" id="gpAsk">
+      <button class="big" id="gpReveal">Показать ответ</button>
+      <button id="gpRepeat">⟲ Ещё раз строку</button>
+    </div>
+    <div id="gpScore" hidden>
+      <div class="gp-answer" id="gpAnswer"></div>
+      <div class="row" id="gpTeams"></div>
+    </div>
+  </div>
+</main>
+
+<audio id="audio" preload="auto"></audio>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+:root {
+  --bg: #14101f;
+  --panel: #221a35;
+  --text: #fff;
+  --muted: #a99cc7;
+  --fill: #3dff6e;
+  --accent: #ff3d8b;
+  --answer: #ffd54a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+body { min-height: 100dvh; padding-bottom: env(safe-area-inset-bottom); }
+button, .btn {
+  font: inherit; color: var(--text); background: var(--panel); border: 1px solid #3a2e57;
+  border-radius: 12px; padding: 10px 14px; cursor: pointer; display: inline-block;
+}
+button:active, .btn:active { transform: scale(.97); }
+button.big { background: var(--accent); border-color: var(--accent); font-weight: 700; }
+input, textarea {
+  width: 100%; font: inherit; color: var(--text); background: #0e0b17; border: 1px solid #3a2e57;
+  border-radius: 10px; padding: 10px; margin-top: 4px;
+}
+textarea { font-family: ui-monospace, Consolas, monospace; font-size: 13px; }
+label { display: block; margin: 12px 0; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.hint { color: var(--muted); }
+[hidden] { display: none !important; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top)); background: #0d0a15; position: sticky; top: 0; z-index: 5; }
+.logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; cursor: pointer; color: #6fd3ff; text-shadow: 2px 2px 0 var(--accent); }
+.logo span { color: #fff; }
+.score { display: flex; gap: 6px; align-items: center; font-size: 14px; }
+.score input { width: 86px; padding: 4px 6px; margin: 0; text-align: center; }
+.score b { font-size: 20px; min-width: 22px; text-align: center; }
+.score button { padding: 4px 8px; }
+
+.screen { padding: 16px; max-width: 720px; margin: 0 auto; }
+.songs { list-style: none; padding: 0; }
+.songs li { display: flex; align-items: center; gap: 8px; background: var(--panel); border-radius: 14px; padding: 12px; margin: 10px 0; }
+.songs .meta { flex: 1; min-width: 0; }
+.songs .meta b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.songs .meta small { color: var(--muted); }
+
+/* Сцена игры */
+.stage { display: flex; flex-direction: column; min-height: calc(100dvh - 60px); }
+.now-title { color: var(--muted); text-align: center; }
+.gapinfo { text-align: center; color: var(--accent); font-weight: 700; min-height: 1.4em; }
+.lyrics { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: 20px 0; }
+.line {
+  text-align: center; text-transform: uppercase; font-weight: 900; letter-spacing: .5px;
+  font-size: clamp(22px, 6.5vw, 40px); line-height: 1.25; min-height: 1.25em;
+  background: linear-gradient(90deg, var(--fill) var(--p, 0%), #fff var(--p, 0%));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+.line.nxt { font-size: clamp(16px, 4.6vw, 28px); opacity: .55; --p: 0%; }
+.blank { display: inline-block; border-bottom: 4px solid #fff; margin: 0 .1em; vertical-align: baseline; }
+.answer { -webkit-text-fill-color: var(--answer); color: var(--answer); }
+.controls { display: flex; justify-content: center; align-items: center; gap: 16px; }
+.controls .round { width: 70px; height: 70px; border-radius: 50%; font-size: 28px; background: var(--accent); border: 0; }
+#pSeek { margin: 14px 0 6px; accent-color: var(--accent); }
+
+.gap-panel { position: fixed; left: 0; right: 0; bottom: 0; background: #0d0a15f2; border-top: 3px solid var(--accent); padding: 16px 16px max(16px, env(safe-area-inset-bottom)); z-index: 10; }
+.gap-panel .row { justify-content: center; }
+.gp-title { text-align: center; font-weight: 900; font-size: 22px; }
+.gp-answer { text-align: center; font-weight: 900; font-size: 26px; color: var(--answer); text-transform: uppercase; margin: 8px 0; }
+
+/* Разметка тапами */
+.tap-now { text-align: center; font-weight: 800; font-size: 20px; min-height: 2.5em; color: var(--fill); text-transform: uppercase; }
+.tap-next { text-align: center; font-weight: 800; font-size: 26px; min-height: 2.5em; text-transform: uppercase; }
+.tap-btn { display: block; width: 100%; height: 34vh; font-size: 32px; font-weight: 900; background: var(--accent); border: 0; margin: 12px 0; }
