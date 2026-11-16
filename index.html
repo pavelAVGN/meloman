@@ -18,6 +18,9 @@
   <div class="score" id="score"></div>
 </header>
 
+<!-- Плеер YouTube (один на всё приложение: iframe нельзя переносить, он перезагрузится) -->
+<div id="ytBox" class="ytbox off"><div id="ytPlayer"></div></div>
+
 <!-- Библиотека -->
 <main id="library" class="screen">
   <button class="big" id="addSong">+ Добавить песню</button>
@@ -30,15 +33,38 @@
   <h2 id="edTitle">Новая песня</h2>
   <label>Название<input id="fTitle" placeholder="Например: Кислотный DJ"></label>
   <label>Исполнитель<input id="fArtist" placeholder="Например: Казускома"></label>
-  <label>Аудиофайл (mp3, m4a…)
-    <input id="fAudio" type="file" accept="audio/*">
-    <small id="audioName"></small>
-  </label>
+  <div class="seg" id="srcSeg">
+    <button data-src="file">Свой файл</button>
+    <button data-src="yt">YouTube</button>
+  </div>
+  <div id="srcFile">
+    <label>Аудиофайл (mp3, m4a…)
+      <input id="fAudio" type="file" accept="audio/*">
+      <small id="audioName"></small>
+    </label>
+  </div>
+  <div id="srcYt" hidden>
+    <label>Ссылка на YouTube или что искать
+      <input id="fYt" placeholder="https://youtu.be/…  или пусто — поиск по названию">
+    </label>
+    <div class="row">
+      <button class="big" id="ytSearch">Найти песню и текст</button>
+      <a id="ytOpen" class="btn" target="_blank" rel="noopener">Открыть YouTube</a>
+    </div>
+    <small id="ytStatus" class="hint"></small>
+    <div id="ytPicked" class="hint"></div>
+    <ul id="ytResults" class="yt-results"></ul>
+    <details class="ytkey">
+      <summary>Ключ YouTube для поиска по названию</summary>
+      <p class="hint">Без ключа вставляй ссылку на ролик. Ключ бесплатный: console.cloud.google.com → создать проект → «APIs &amp; Services» → включить «YouTube Data API v3» → «Credentials» → «Create credentials» → «API key». Ключ хранится только на этом телефоне.</p>
+      <input id="ytKey" placeholder="AIza…" autocomplete="off">
+    </details>
+  </div>
   <label>Текст в формате LRC
     <textarea id="fLrc" rows="10" placeholder="[00:12.30]Первая строка песни&#10;[00:15.80]Вторая строка…"></textarea>
   </label>
   <div class="row">
-    <label class="btn">Загрузить .lrc<input id="fLrcFile" type="file" accept=".lrc,.txt,text/plain" hidden></label>
+    <label class="btn" id="lrcFileBtn">Загрузить .lrc<input id="fLrcFile" type="file" accept=".lrc,.txt,text/plain" hidden></label>
     <button id="findLrc">Найти текст в интернете</button>
     <button id="tapSync">Разметить тапами</button>
   </div>
@@ -77,6 +103,12 @@
     <button id="pReshuffle" title="Новые пропуски">🎲</button>
   </div>
   <input type="range" id="pSeek" min="0" max="1000" value="0">
+  <div class="offset">
+    <span class="hint">Текст не совпадает с песней?</span>
+    <button id="offMinus">◀ раньше</button>
+    <b id="offVal">0.0 с</b>
+    <button id="offPlus">позже ▶</button>
+  </div>
 
   <div class="gap-panel" id="gapPanel" hidden>
     <div class="gp-title">⏸ СТОП! Какие слова дальше?</div>

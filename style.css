@@ -65,6 +65,25 @@ label { display: block; margin: 12px 0; color: var(--muted); }
 .gp-title { text-align: center; font-weight: 900; font-size: 22px; }
 .gp-answer { text-align: center; font-weight: 900; font-size: 26px; color: var(--answer); text-transform: uppercase; margin: 8px 0; }
 
+.seg { display: flex; gap: 0; margin: 12px 0; }
+.seg button { flex: 1; border-radius: 0; }
+.seg button:first-child { border-radius: 12px 0 0 12px; }
+.seg button:last-child { border-radius: 0 12px 12px 0; }
+.seg button.on { background: var(--accent); border-color: var(--accent); font-weight: 700; }
+.yt-results { list-style: none; padding: 0; }
+.yt-results li { display: flex; gap: 10px; align-items: center; background: var(--panel); border-radius: 12px; padding: 8px; margin: 8px 0; cursor: pointer; border: 2px solid transparent; }
+.yt-results li.on { border-color: var(--fill); }
+.yt-results img { width: 96px; border-radius: 8px; flex: none; }
+.yt-results small { color: var(--muted); display: block; }
+.yt-results .near { color: var(--fill); }
+.ytkey summary { color: var(--muted); cursor: pointer; margin: 10px 0; }
+#ytPicked { color: var(--fill); }
+.ytbox { max-width: 720px; margin: 8px auto 0; padding: 0 16px; }
+.ytbox iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: 0; border-radius: 12px; display: block; }
+.ytbox.off { position: absolute; left: -9999px; top: 0; width: 320px; }
+.offset { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; font-size: 14px; }
+.offset button { padding: 6px 10px; }
+
 /* Разметка тапами */
 .tap-now { text-align: center; font-weight: 800; font-size: 20px; min-height: 2.5em; color: var(--fill); text-transform: uppercase; }
 .tap-next { text-align: center; font-weight: 800; font-size: 26px; min-height: 2.5em; text-transform: uppercase; }
